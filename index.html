@@ -1,481 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inclusive Harlem Plaza</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --mint: #49c5b1;
-      --mint-dark: #39b39f;
-      --bg: #f4f4f4;
-      --text: #6b7280;
-      --heading: #5b6472;
-      --line: #e6e6e6;
-      --white: #ffffff;
-      --sidebar-width: 29%;
-      --content-width: 71%;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inclusive Harlem Plaza</title>
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Source Sans 3", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    h1, h2, h3, h4 {
-      color: var(--heading);
-      line-height: 1.25;
-      margin: 0 0 .7em 0;
-      font-weight: 700;
-    }
+<style>
+body {
+  margin:0;
+  font-family: 'Source Sans 3', sans-serif;
+  display:flex;
+  background:#f4f4f4;
+}
 
-    h1 { font-size: 2.9rem; }
-    h2 { font-size: 2.5rem; }
-    h3 { font-size: 2rem; }
-    h4 { font-size: 1.35rem; }
-    p { margin: 0 0 1.25em 0; font-size: 1.2rem; }
-    ul { margin: 0 0 1.5em 1.25em; font-size: 1.15rem; }
-    li { margin-bottom: .45em; }
-    a { color: var(--mint-dark); text-decoration: none; }
+/* MAIN CONTENT */
+#main {
+  width:70%;
+  padding:50px;
+}
 
-    #wrapper {
-      display: flex;
-      min-height: 100vh;
-    }
+/* SIDEBAR */
+#sidebar {
+  width:30%;
+  position:fixed;
+  right:0;
+  top:0;
+  height:100vh;
+  background:#49c5b1;
+  color:white;
+  text-align:center;
+  padding:30px;
+}
 
-    #main {
-      width: var(--content-width);
-      margin-right: var(--sidebar-width);
-      background: var(--bg);
-    }
+/* TEXT */
+h1 {font-size:36px;}
+h2 {font-size:28px;}
+p {color:#555;}
 
-    #sidebar {
-      width: var(--sidebar-width);
-      position: fixed;
-      right: 0;
-      top: 0;
-      height: 100vh;
-      background: var(--mint);
-      color: rgba(255,255,255,.92);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: center;
-      overflow-y: auto;
-    }
+/* IMAGE */
+img {
+  width:100%;
+  border-radius:10px;
+  margin-top:20px;
+}
 
-    .hero-image {
-      height: 34vh;
-      min-height: 240px;
-      background-image: linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.18)), url('images/before-after.jpg');
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
+/* SECTIONS */
+section {
+  margin-bottom:80px;
+}
 
-    .sidebar-top {
-      padding-bottom: 0;
-    }
-
-    .profile {
-      padding: 2.25rem 2rem 1.5rem;
-    }
-
-    .profile-badge {
-      width: 148px;
-      height: 148px;
-      margin: -74px auto 1.5rem;
-      border-radius: 50%;
-      border: 8px solid var(--mint);
-      background: #fff url('images/before-after.jpg') center/cover no-repeat;
-      box-shadow: var(--shadow);
-    }
-
-    .profile h2 {
-      color: #fff;
-      font-size: 2.3rem;
-      margin-bottom: .35em;
-    }
-
-    .profile p {
-      color: rgba(255,255,255,.86);
-      font-size: 1.45rem;
-      font-style: italic;
-      margin: 0 auto;
-      max-width: 19rem;
-    }
-
-    .nav {
-      border-top: 1px solid rgba(255,255,255,.15);
-      border-bottom: 1px solid rgba(255,255,255,.15);
-    }
-
-    .nav a {
-      display: block;
-      color: rgba(255,255,255,.9);
-      padding: 1.15rem 1rem;
-      font-size: 1.55rem;
-      border-top: 1px solid rgba(255,255,255,.14);
-      transition: background .2s ease, color .2s ease;
-    }
-
-    .nav a:first-child { border-top: 0; }
-    .nav a:hover { background: rgba(255,255,255,.08); color: #fff; }
-
-    .sidebar-footer {
-      padding: 1.35rem 1rem 2rem;
-      color: rgba(255,255,255,.85);
-      font-size: 1rem;
-    }
-
-    .inner {
-      max-width: 970px;
-      margin: 0 auto;
-      padding: 0 4.5rem;
-    }
-
-    section {
-      padding: 5.75rem 0;
-      border-top: 1px solid var(--line);
-    }
-
-    section:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .intro .banner {
-      width: calc(100% + 9rem);
-      margin-left: -4.5rem;
-      border: 0;
-      display: block;
-      height: 28rem;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .intro-copy {
-      padding-top: 5.25rem;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      font-size: .95rem;
-      color: var(--mint-dark);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .lead {
-      font-size: 1.55rem;
-      max-width: 44rem;
-    }
-
-    .button-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .button {
-      display: inline-block;
-      padding: .95rem 1.5rem;
-      border-radius: .45rem;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: .03em;
-      border: 2px solid var(--mint);
-      background: var(--mint);
-      color: #fff;
-    }
-
-    .button.alt {
-      background: transparent;
-      color: var(--mint-dark);
-    }
-
-    .feature-image,
-    .single-image {
-      width: 100%;
-      display: block;
-      border-radius: .4rem;
-      box-shadow: var(--shadow);
-      margin: 1.2rem 0 2rem;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .card {
-      display: grid;
-      grid-template-columns: 42% 1fr;
-      gap: 2rem;
-      align-items: center;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .card:last-child { border-bottom: 0; padding-bottom: 0; }
-
-    .card img {
-      width: 100%;
-      border-radius: .35rem;
-      display: block;
-      box-shadow: var(--shadow);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .mini-card {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: .4rem;
-      box-shadow: var(--shadow);
-    }
-
-    .option-list {
-      display: grid;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .option {
-      background: #fff;
-      padding: 1.8rem;
-      border-radius: .4rem;
-      box-shadow: var(--shadow);
-      border-left: 6px solid var(--mint);
-    }
-
-    .caption {
-      font-size: 1rem;
-      color: #8791a1;
-      margin-top: -.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-note {
-      font-size: 1rem;
-      color: #97a0ad;
-      margin-top: 1.25rem;
-    }
-
-    @media (max-width: 1180px) {
-      :root {
-        --sidebar-width: 34%;
-        --content-width: 66%;
-      }
-      .inner { padding: 0 3rem; }
-      .intro .banner { width: calc(100% + 6rem); margin-left: -3rem; }
-      h1 { font-size: 2.4rem; }
-      h2 { font-size: 2.15rem; }
-      .card { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 900px) {
-      #wrapper { display: block; }
-      #main {
-        width: 100%;
-        margin-right: 0;
-      }
-      #sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-      }
-      .hero-image { height: 18rem; }
-      .profile-badge { margin-top: -64px; }
-      .inner { padding: 0 1.5rem; }
-      .intro .banner { width: calc(100% + 3rem); margin-left: -1.5rem; height: 18rem; }
-      section { padding: 4rem 0; }
-      .intro-copy { padding-top: 3rem; }
-      .grid-2 { grid-template-columns: 1fr; }
-      .nav a { font-size: 1.2rem; }
-      p, ul { font-size: 1.05rem; }
-    }
-  </style>
+/* NAV */
+#sidebar a {
+  display:block;
+  color:white;
+  margin:10px 0;
+  text-decoration:none;
+}
+</style>
 </head>
+
 <body>
-  <div id="wrapper">
-    <main id="main">
-      <div class="inner">
-        <section class="intro" id="home">
-          <img class="banner" src="images/before-after.jpg" alt="Inclusive Harlem before and after redesign rendering" />
-          <div class="intro-copy">
-            <span class="eyebrow">Academic Design Review</span>
-            <h1>Inclusive Harlem: Redesigning Harlem Pedestrian Plaza for Comfort, Dignity, and Shared Public Use</h1>
-            <p class="lead">This project proposes a more welcoming, accessible, and inclusive plaza for a wide mix of users. The redesign focuses on comfort, dignity, visibility, circulation, and shared public use, using AI-assisted image development and human design judgment.</p>
-            <div class="button-row">
-              <a class="button" href="#proposal">View Final Proposal</a>
-              <a class="button alt" href="#reflection">AI Reflection</a>
-            </div>
-          </div>
-        </section>
 
-        <section id="about">
-          <h2>About the Project</h2>
-          <p><strong>Project Goal:</strong> Redesign Harlem Pedestrian Plaza as a more inclusive public space that works for many different users, with stronger comfort, accessibility, dignity, visibility, and shared use.</p>
-          <p><strong>Essential Question:</strong> How can Harlem Pedestrian Plaza be redesigned so it feels more welcoming, inclusive, and usable for a wide mix of people with different needs?</p>
-          <div class="grid-2">
-            <div class="mini-card">
-              <h4>What This Project Produces</h4>
-              <ul>
-                <li>User diversity analysis</li>
-                <li>Accessibility and comfort review</li>
-                <li>Comfort and inclusion map</li>
-                <li>Conflict analysis</li>
-                <li>Redesign proposal</li>
-                <li>Seating and amenities strategy</li>
-              </ul>
-            </div>
-            <div class="mini-card">
-              <h4>Key Deliverables</h4>
-              <ul>
-                <li>Survey summary and precedent comparison</li>
-                <li>Three concept options</li>
-                <li>Final redesign and visualizations</li>
-                <li>Budget and timeline</li>
-                <li>Website page, AI log, and PDF</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+<div id="main">
 
-        <section id="problem">
-          <h2>The Problem</h2>
-          <p>Harlem Plaza does not fully support inclusive, dignified public use. Existing conditions suggest limited comfort, insufficient shade, uneven accessibility, and a layout that does not clearly balance different types of users or activities. As a result, the plaza can feel under-equipped for elderly residents, people with disabilities, families, commuters, and people who need places to sit, rest, or gather comfortably.</p>
-          <p>The redesign challenge is not only aesthetic. It is social and spatial: how can one plaza serve many people fairly without making any group feel excluded, displaced, or overlooked?</p>
-        </section>
+<section id="home">
+<h1>Inclusive Harlem Plaza</h1>
+<p>Redesigning Harlem Pedestrian Plaza for comfort, dignity, and shared use.</p>
 
-        <section id="site">
-          <h2>Site / Context</h2>
-          <p>This project focuses on inclusion as a site-analysis lens. The plaza was studied through comfort, accessibility, circulation, visibility, and shared use. The goal is to understand how the current space supports or fails different users throughout the day.</p>
-          <div class="grid-2">
-            <div class="mini-card">
-              <h4>User Groups</h4>
-              <ul>
-                <li>Elderly residents</li>
-                <li>People with disabilities</li>
-                <li>Families and children</li>
-                <li>Commuters and pass-through users</li>
-                <li>Unhoused individuals</li>
-                <li>Local community members</li>
-              </ul>
-            </div>
-            <div class="mini-card">
-              <h4>Observed Issues</h4>
-              <ul>
-                <li>Uneven comfort and limited weather protection</li>
-                <li>Unclear movement paths and weak seating variety</li>
-                <li>Potential conflict between active and quiet uses</li>
-                <li>Accessibility gaps in how the space is experienced</li>
-                <li>Limited amenities that support dignity and longer stays</li>
-              </ul>
-            </div>
-          </div>
-          <p class="footer-note">Suggested diagrams to add later: comfort and inclusion map, conflict analysis, accessibility review, and user feedback summary.</p>
-        </section>
+<img src="ChatGPT Image Apr 18, 2026.png" alt="Before After">
+</section>
 
-        <section id="options">
-          <h2>Design Options</h2>
-          <p>Three concepts were developed to test different approaches to inclusion in the plaza. Each option responds to the same core question, but emphasizes a different design priority.</p>
-          <div class="option-list">
-            <div class="option">
-              <h4>Option 1 — Comfort First Plaza</h4>
-              <p>Prioritizes shaded seating, rest zones, flexible benches with backs and armrests, and calmer places for pause. This option focuses on physical comfort and longer stays.</p>
-            </div>
-            <div class="option">
-              <h4>Option 2 — Shared Use Plaza</h4>
-              <p>Balances movement, gathering, and informal public life. This option strengthens circulation while creating spaces that different user groups can share more easily throughout the day.</p>
-            </div>
-            <div class="option">
-              <h4>Option 3 — Community Support Plaza</h4>
-              <p>Centers dignity, care, and inclusive public-space principles. It imagines the plaza as a social commons with supportive amenities, welcoming edges, and more equitable use.</p>
-            </div>
-          </div>
-        </section>
+<section>
+<h2>About the Project</h2>
+<p>This project redesigns Harlem Plaza to improve comfort, accessibility, and inclusion.</p>
+</section>
 
-        <section id="proposal">
-          <h2>Final Proposal</h2>
-          <p>The final proposal combines the strongest parts of all three concepts into one inclusive redesign. The selected direction adds shade structures, accessible seating, clearer circulation, and more socially balanced gathering areas. The result is a plaza that feels more legible, comfortable, and welcoming for users with different physical needs, time patterns, and expectations of public space.</p>
-          <img class="single-image" src="images/before-after.jpg" alt="Final inclusive Harlem plaza redesign rendering" />
-          <p class="caption">AI-generated redesign visual showing the transformation of the plaza into a more accessible and comfort-oriented public space.</p>
-          <div class="grid-2">
-            <div class="mini-card">
-              <h4>Core Design Features</h4>
-              <ul>
-                <li>Shaded seating and improved thermal comfort</li>
-                <li>More accessible seating arrangements</li>
-                <li>Clearer movement and gathering zones</li>
-                <li>Improved dignity through inclusive amenities</li>
-                <li>Stronger visibility and shared-use logic</li>
-              </ul>
-            </div>
-            <div class="mini-card">
-              <h4>Amenities, Operations, and Budget Plan</h4>
-              <ul>
-                <li>Phase 1: seating, shade, and circulation upgrades</li>
-                <li>Phase 2: planting, signage, and comfort amenities</li>
-                <li>Phase 3: maintenance and operations framework</li>
-                <li>Budget strategy focused on high-impact public use improvements</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+<section>
+<h2>The Problem</h2>
+<p>The plaza lacks seating, shade, accessibility, and inclusive design.</p>
+</section>
 
-        <section id="reflection">
-          <h2>Human Reflection on AI Use</h2>
-          <p><strong>What AI helped with:</strong> AI supported rapid visual exploration, helped test spatial ideas, and produced original redesign imagery that made it easier to communicate atmosphere, seating concepts, and an inclusive tone.</p>
-          <p><strong>What required human judgment:</strong> Human decisions defined what inclusion means in this plaza, selected the final concept, interpreted real user needs, and evaluated whether the design supported dignity, comfort, and shared public use in a meaningful way.</p>
-          <p>This project shows that AI is useful for visualization and iteration, but the most important design decisions still depend on human research, ethical judgment, and project-specific thinking.</p>
-        </section>
-      </div>
-    </main>
+<section>
+<h2>Site / Context</h2>
+<ul>
+<li>Elderly residents</li>
+<li>People with disabilities</li>
+<li>Families</li>
+<li>Commuters</li>
+</ul>
+</section>
 
-    <aside id="sidebar">
-      <div class="sidebar-top">
-        <div class="hero-image"></div>
-        <div class="profile">
-          <div class="profile-badge"></div>
-          <h2>Inclusive Harlem</h2>
-          <p>Comfort, dignity, accessibility, and shared public use.</p>
-        </div>
-        <nav class="nav">
-          <a href="#home">Home</a>
-          <a href="#about">About the Project</a>
-          <a href="#problem">The Problem</a>
-          <a href="#site">Site / Context</a>
-          <a href="#options">Design Options</a>
-          <a href="#proposal">Final Proposal</a>
-          <a href="#reflection">Reflection</a>
-        </nav>
-      </div>
-      <div class="sidebar-footer">
-        Harlem Pedestrian Plaza redesign proposal<br />
-        Built for academic presentation review.
-      </div>
-    </aside>
-  </div>
+<section>
+<h2>Design Options</h2>
+<p>Comfort First, Shared Use, and Community Support concepts were explored.</p>
+</section>
+
+<section>
+<h2>Final Proposal</h2>
+<img src="ChatGPT Image Apr 18, 2026.png">
+</section>
+
+<section>
+<h2>Reflection</h2>
+<p>AI helped generate visuals. Human thinking guided the design decisions.</p>
+</section>
+
+</div>
+
+<div id="sidebar">
+<h2>Inclusive Harlem</h2>
+
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#problem">Problem</a>
+<a href="#site">Site</a>
+<a href="#options">Options</a>
+<a href="#final">Final</a>
+<a href="#reflection">Reflection</a>
+
+</div>
+
 </body>
 </html>
